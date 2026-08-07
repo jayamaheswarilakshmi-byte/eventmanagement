@@ -1,0 +1,15 @@
+# Local Database
+db.sqlite3
+*.sqlite3
+
+# Uploaded Media Files
+media/
+
+# Static Collection Directory
+staticfiles/
+
+# Python Cache & Virtual Environments
+__pycache__/
+*.pyc
+venv/
+.venv/
