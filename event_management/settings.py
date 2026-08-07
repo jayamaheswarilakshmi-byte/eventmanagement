@@ -30,12 +30,14 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.onrender.com']
 
 INSTALLED_APPS = [
     'website',
+    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
 ]
 
 
@@ -176,7 +178,15 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', 'qjuerwcd', ),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY', '362546572366797'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET', 
+                                 '	KGZqLoPJN5lqNV2xfYBPI1l02v4'),
+}
 
+# Tell Django to store uploaded media files on Cloudinary
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # --------------------------------------------------
 # Email Configuration (Environment Driven)
 # --------------------------------------------------
