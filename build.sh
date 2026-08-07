@@ -10,3 +10,7 @@ python manage.py collectstatic --noinput
 
 # Apply database migrations to PostgreSQL
 python manage.py migrate
+
+if [ "$DJANGO_SUPERUSER_USERNAME" ]; then
+    python manage.py createsuperuser --no-input || true
+fi
