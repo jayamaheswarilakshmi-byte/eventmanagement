@@ -1,0 +1,287 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Events
+{% endblock %}
+
+{% block content %}
+
+<section class="events-page">
+    <div class="container">
+
+        <h1 class="page-title">Events</h1>
+
+        <!-- ================= FILTERS ================= -->
+        <div class="filters">
+
+            <!-- 1. Event Type Filter -->
+            <select id="filterType">
+                <option value="all">Event Type (All)</option>
+                <option value="wedding">Wedding</option>
+                <option value="birthday">Birthday</option>
+                <option value="corporate">Corporate</option>
+                <option value="reception">Reception</option>
+                <option value="festival">Festival</option>
+                <option value="party">Party</option>
+            </select>
+
+            <!-- 2. Budget Range Filter -->
+            <select id="filterBudget">
+                <option value="all">Budget Range (All)</option>
+                <option value="below-25k">Below ₹25,000</option>
+                <option value="25k-50k">₹25,000 - ₹50,000</option>
+                <option value="50k-100k">₹50,000 - ₹1,00,000</option>
+                <option value="above-100k">Above ₹1,00,000</option>
+            </select>
+
+            <!-- 3. Location Filter -->
+            <select id="filterLocation">
+                <option value="all">Location (All)</option>
+                <option value="chennai">Chennai</option>
+                <option value="coimbatore">Coimbatore</option>
+                <option value="madurai">Madurai</option>
+                <option value="trichy">Trichy</option>
+            </select>
+
+            <!-- 4. Venue Type Filter -->
+            <select id="filterVenue">
+                <option value="all">Venue (All)</option>
+                <option value="indoor">Indoor</option>
+                <option value="outdoor">Outdoor</option>
+                <option value="banquet">Banquet Hall</option>
+                <option value="beach">Beach</option>
+            </select>
+
+            <button type="button" id="resetFiltersBtn" class="reset-btn">Reset Filters</button>
+
+        </div>
+
+        <!-- ================= EVENTS GRID ================= -->
+        <div class="events-grid" id="eventsGrid">
+
+            <!-- Card 1 -->
+            <div class="event-card" data-type="corporate" data-price="75000" data-location="chennai" data-venue="indoor">
+                <img src="{% static 'images/conference.jpg' %}" alt="Tech Conference">
+                <div class="card-body">
+                    <h3>Tech Conference 2024</h3>
+                    <p class="price-tag">Price: ₹75,000</p>
+                    <p>A gathering of technology innovators and industry leaders.</p>
+                    <a href="{% url 'event_detail' pk=1 %}" class="view-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="event-card" data-type="corporate" data-price="35000" data-location="coimbatore" data-venue="banquet">
+                <img src="{% static 'images/corporate.jpg' %}" alt="Corporate Event">
+                <div class="card-body">
+                    <h3>Corporate Event</h3>
+                    <p class="price-tag">Price: ₹35,000</p>
+                    <p>Professional business meetings and networking sessions.</p>
+                    <a href="{% url 'event_detail' pk=2 %}" class="view-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="event-card" data-type="party" data-price="40000" data-location="chennai" data-venue="indoor">
+                <img src="{% static 'images/private.jpg' %}" alt="Private Party">
+                <div class="card-body">
+                    <h3>Private Party</h3>
+                    <p class="price-tag">Price: ₹40,000</p>
+                    <p>Exclusive private celebrations with elegant arrangements.</p>
+                    <a href="{% url 'event_detail' pk=3 %}" class="view-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="event-card" data-type="festival" data-price="150000" data-location="madurai" data-venue="outdoor">
+                <img src="{% static 'images/festival.jpg' %}" alt="Festival">
+                <div class="card-body">
+                    <h3>Festival</h3>
+                    <p class="price-tag">Price: ₹1,50,000</p>
+                    <p>Large cultural festivals with music and entertainment.</p>
+                    <a href="{% url 'event_detail' pk=4 %}" class="view-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Card 5 (Wedding) -->
+            <div class="event-card" data-type="wedding" data-price="200000" data-location="chennai" data-venue="banquet">
+                <img src="{% static 'images/wedding.jpg' %}" alt="Wedding">
+                <div class="card-body">
+                    <h3>Wedding</h3>
+                    <p class="price-tag">Price: ₹2,00,000</p>
+                    <p>Elegant wedding planning with premium decorations.</p>
+                    <a href="{% url 'event_detail' pk=5 %}" class="view-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="event-card" data-type="festival" data-price="80000" data-location="trichy" data-venue="outdoor">
+                <img src="{% static 'images/music.jpg' %}" alt="Summer Music Festival">
+                <div class="card-body">
+                    <h3>Summer Music Festival</h3>
+                    <p class="price-tag">Price: ₹80,000</p>
+                    <p>Outdoor music festival with live performances.</p>
+                    <a href="{% url 'event_detail' pk=6 %}" class="view-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="event-card" data-type="corporate" data-price="120000" data-location="chennai" data-venue="banquet">
+                <img src="{% static 'images/galanight.jpg' %}" alt="Corporate Gala">
+                <div class="card-body">
+                    <h3>Corporate Gala</h3>
+                    <p class="price-tag">Price: ₹1,20,000</p>
+                    <p>Corporate awards and networking gala night.</p>
+                    <a href="{% url 'event_detail' pk=7 %}" class="view-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="event-card" data-type="reception" data-price="30000" data-location="coimbatore" data-venue="indoor">
+                <img src="{% static 'images/art.jpg' %}" alt="Art Exhibition">
+                <div class="card-body">
+                    <h3>Art Exhibition</h3>
+                    <p class="price-tag">Price: ₹30,000</p>
+                    <p>Creative exhibitions showcasing modern artworks.</p>
+                    <a href="{% url 'event_detail' pk=8 %}" class="view-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Card 9 -->
+            <div class="event-card" data-type="party" data-price="18000" data-location="madurai" data-venue="indoor">
+                <img src="{% static 'images/charity.jpg' %}" alt="Charity Event">
+                <div class="card-body">
+                    <h3>Charity Event</h3>
+                    <p class="price-tag">Price: ₹18,000</p>
+                    <p>Fundraising event for social welfare initiatives.</p>
+                    <a href="{% url 'event_detail' pk=9 %}" class="view-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Card 10 -->
+            <div class="event-card" data-type="reception" data-price="60000" data-location="chennai" data-venue="beach">
+                <img src="{% static 'images/food.jpg' %}" alt="Food & Wine Tasting">
+                <div class="card-body">
+                    <h3>Food & Wine Tasting</h3>
+                    <p class="price-tag">Price: ₹60,000</p>
+                    <p>Experience premium food and wine tasting sessions.</p>
+                    <a href="{% url 'event_detail' pk=10 %}" class="view-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Card 11 -->
+            <div class="event-card" data-type="birthday" data-price="20000" data-location="trichy" data-venue="indoor">
+                <img src="{% static 'images/nameceremony.jpg' %}" alt="Name Ceremony">
+                <div class="card-body">
+                    <h3>Name Ceremony</h3>
+                    <p class="price-tag">Price: ₹20,000</p>
+                    <p>Traditional naming ceremony with family celebrations.</p>
+                    <a href="{% url 'event_detail' pk=11 %}" class="view-btn">View Details</a>
+                </div>
+            </div>
+
+            <!-- Card 12 -->
+            <div class="event-card" data-type="birthday" data-price="45000" data-location="coimbatore" data-venue="indoor">
+                <img src="{% static 'images/babyshower.jpg' %}" alt="Baby Shower">
+                <div class="card-body">
+                    <h3>Baby Shower</h3>
+                    <p class="price-tag">Price: ₹45,000</p>
+                    <p>Beautiful baby shower themes and decorations.</p>
+                    <a href="{% url 'event_detail' pk=12 %}" class="view-btn">View Details</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- No Results Fallback Message -->
+        <p id="noResultsMsg" style="display: none; text-align: center; margin-top: 40px; font-size: 18px; color: #666;">
+            No events found matching your criteria.
+        </p>
+
+    </div>
+</section>
+
+<!-- ================= JAVASCRIPT FILTER LOGIC ================= -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const filterType = document.getElementById("filterType");
+        const filterBudget = document.getElementById("filterBudget");
+        const filterLocation = document.getElementById("filterLocation");
+        const filterVenue = document.getElementById("filterVenue");
+        const resetBtn = document.getElementById("resetFiltersBtn");
+        const cards = document.querySelectorAll(".event-card");
+        const noResultsMsg = document.getElementById("noResultsMsg");
+
+        function filterEvents() {
+            const selectedType = filterType.value.toLowerCase().trim();
+            const selectedBudget = filterBudget.value;
+            const selectedLocation = filterLocation.value.toLowerCase().trim();
+            const selectedVenue = filterVenue.value.toLowerCase().trim();
+
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const cardType = (card.getAttribute("data-type") || "").toLowerCase().trim();
+                const cardPrice = parseFloat(card.getAttribute("data-price") || "0");
+                const cardLocation = (card.getAttribute("data-location") || "").toLowerCase().trim();
+                const cardVenue = (card.getAttribute("data-venue") || "").toLowerCase().trim();
+
+                // 1. Check Event Type
+                const matchType = (selectedType === "all" || cardType === selectedType);
+
+                // 2. Check Location
+                const matchLocation = (selectedLocation === "all" || cardLocation === selectedLocation);
+
+                // 3. Check Venue
+                const matchVenue = (selectedVenue === "all" || cardVenue === selectedVenue);
+
+                // 4. Check Budget Numeric Ranges
+                let matchBudget = false;
+                if (selectedBudget === "all") {
+                    matchBudget = true;
+                } else if (selectedBudget === "below-25k" && cardPrice < 25000) {
+                    matchBudget = true;
+                } else if (selectedBudget === "25k-50k" && cardPrice >= 25000 && cardPrice <= 50000) {
+                    matchBudget = true;
+                } else if (selectedBudget === "50k-100k" && cardPrice > 50000 && cardPrice <= 100000) {
+                    matchBudget = true;
+                } else if (selectedBudget === "above-100k" && cardPrice > 100000) {
+                    matchBudget = true;
+                }
+
+                // Render card based on match status
+                if (matchType && matchBudget && matchLocation && matchVenue) {
+                    card.style.display = "block";
+                    visibleCount++;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            // Toggle "No Results" message
+            if (visibleCount === 0) {
+                noResultsMsg.style.display = "block";
+            } else {
+                noResultsMsg.style.display = "none";
+            }
+        }
+
+        // Add Event Listeners to all Dropdowns
+        filterType.addEventListener("change", filterEvents);
+        filterBudget.addEventListener("change", filterEvents);
+        filterLocation.addEventListener("change", filterEvents);
+        filterVenue.addEventListener("change", filterEvents);
+
+        // Reset Button Listener
+        resetBtn.addEventListener("click", function () {
+            filterType.value = "all";
+            filterBudget.value = "all";
+            filterLocation.value = "all";
+            filterVenue.value = "all";
+            filterEvents();
+        });
+    });
+</script>
+
+{% endblock %}

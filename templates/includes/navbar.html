@@ -1,0 +1,43 @@
+{% load static %}
+
+<header class="header">
+
+    <div class="navbar">
+
+        <div class="container">
+
+            <!-- Logo -->
+            <a href="/" class="logo">
+                <img src="{% static 'images/logo1.png' %}" alt="Logo Icon">
+                <img src="{% static 'images/logo2.png' %}" alt="Make Events">
+            </a>
+
+            <!-- Navigation -->
+            <nav>
+
+                <ul class="nav-links">
+
+                    <li><a href="/">Home</a></li>
+
+                    <li><a href="/events/">Events</a></li>
+
+                    <li><a href="/services/">Services</a></li>
+
+                    <li><a href="/about/">About Us</a></li>
+
+                    <li><a href="/contact/">Contact</a></li>
+
+                </ul>
+
+            </nav>
+
+            <!-- Button -->
+       <a href="{% url 'book_event' %}" class="book-btn">Book Event</a>
+
+          
+
+        </div>
+
+    </div>
+
+</header>

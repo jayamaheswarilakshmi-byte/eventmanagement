@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Book Event - Make Events{% endblock %}
+
+{% block content %}
+<section class="booking-section">
+
+    <div class="booking-container">
+
+        <!-- Form Card -->
+        <div class="booking-card">
+            <h2>Book Your Event</h2>
+            <p class="booking-subtitle">Fill out the form below to book your event with us. We'll get back to you within 24 hours.</p>
+
+            <!-- Django Flash Messages -->
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST" action="{% url 'book_event' %}" class="booking-form">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" class="form-control" 
+                           placeholder="Enter your name" required value="{{ name|default:'' }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" 
+                           placeholder="Enter your phone number" required pattern="[0-9+\s\-]{8,15}"
+                           value="{{ phone|default:'' }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" 
+                           placeholder="Enter your email" required value="{{ email|default:'' }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="event_type">Event Type</label>
+                    <select id="event_type" name="event_type" class="form-control" required>
+                        <option value="Corporate Event">Corporate Event</option>
+                        <option value="Wedding">Wedding</option>
+                        <option value="Private Party">Private Party</option>
+                        <option value="Tech Conference">Tech Conference</option>
+                        <option value="Festivals">Festivals</option>
+                        <option value="NameCeremony">Name ceremony</option>
+                        <option value="Baby shower">Baby Shower</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="event_date">Event Date</label>
+                    <input type="date" id="event_date" name="event_date" class="form-control" 
+                           required value="{{ event_date|default:'' }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" class="form-control" 
+                           placeholder="Enter event location" required value="{{ location|default:'' }}">
+                </div>
+               <div class="form-group">
+                    <label for="message">Message/Requirements</label>
+                    <textarea id="message" name="message" class="form-control" rows="4" 
+                             placeholder="Write your special requests or notes here...">{{ user_message|default:'' }}</textarea>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn-submit">Submit Booking</button>
+                    <button type="button" class="track-call-btn" data-source="book event Page" style="padding: 10px 20px; background:linear-gradient(
+        90deg,
+        #6d1118,
+        #f2c45c );color: white; border: none; border-radius: 5px; cursor: pointer;">
+    📞 Call Organizer
+</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Information Side Card -->
+        <div class="booking-info-card">
+            <h2>Contact Information</h2>
+
+            <div class="booking-info-list">
+                
+                <div class="booking-info-item">
+                    <div class="booking-icon-box">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                        </svg>
+                    </div>
+                    <div class="booking-info-details">
+                        <span class="booking-info-label">Phone</span>
+                        <span class="booking-info-value">+1-555-123-4567</span>
+                    </div>
+                </div>
+
+                <div class="booking-info-item">
+                    <div class="booking-icon-box">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                    </div>
+                    <div class="booking-info-details">
+                        <span class="booking-info-label">Email</span>
+                        <span class="booking-info-value">info@ultimateevents.com</span>
+                    </div>
+                </div>
+
+                <div class="booking-info-item">
+                    <div class="booking-icon-box">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                    </div>
+                    <div class="booking-info-details">
+                        <span class="booking-info-label">Office</span>
+                        <span class="booking-info-value">123 Event Avenue, Cityville, State 12345</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- JavaScript to handle Instant Call Request -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const callBtn = document.querySelector(".track-call-btn");
+
+    if (!callBtn) {
+        console.error("Button with class 'track-call-btn' was not found.");
+        return;
+    }
+
+    callBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+
+        // 1. Read input values from your form fields
+        const name = document.querySelector('[name="name"]')?.value.trim() || "";
+        const phone = document.querySelector('[name="phone"]')?.value.trim() || "";
+        const email = document.querySelector('[name="email"]')?.value.trim() || "";
+        const eventType = document.querySelector('[name="event_type"]')?.value.trim() || "";
+
+        // 2. Validate phone number
+        if (!phone) {
+            alert("⚠️ Please enter your phone number before requesting a call.");
+            const phoneField = document.querySelector('[name="phone"]');
+            if (phoneField) phoneField.focus();
+            return;
+        }
+
+        // 3. Store original styles and show loading feedback on the button
+        const originalText = callBtn.innerText;
+        const originalBg = callBtn.style.background;
+        
+        callBtn.innerText = "⏳ Requesting Call...";
+        callBtn.disabled = true;
+
+        // 4. Extract CSRF token from form
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value || "{{ csrf_token }}";
+
+        // 5. Send JSON payload to Django view
+        fetch("{% url 'log_instant_call' %}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": csrfToken
+            },
+            body: JSON.stringify({
+                "name": name,
+                "phone_number": phone,
+                "email": email,
+                "event_type": eventType
+            })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.status === "success") {
+                // Success state UI
+                callBtn.innerText = "✓ Call Request Received!";
+                callBtn.style.background = "#28a745";
+                
+                alert("✓ Success! Your request has been logged. We will call you shortly.");
+
+                // Reset button text after 4 seconds
+                setTimeout(() => {
+                    callBtn.innerText = originalText;
+                    callBtn.style.background = originalBg;
+                    callBtn.disabled = false;
+                }, 4000);
+            } else {
+                alert("⚠️ Request failed: " + (data.reason || "Unable to log request."));
+                callBtn.innerText = originalText;
+                callBtn.style.background = originalBg;
+                callBtn.disabled = false;
+            }
+        })
+        .catch(err => {
+            console.error("AJAX Error:", err);
+            alert("❌ Could not connect to backend: " + err.message);
+            callBtn.innerText = originalText;
+            callBtn.style.background = originalBg;
+            callBtn.disabled = false;
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ event.title }} - Details{% endblock %}
+{% block content %}
+
+<section class="event-detail-section">
+
+    <div class="container">
+
+        <!-- Banner Image -->
+        <div class="banner-wrapper">
+            {% if event.banner_image %}
+                <img src="{{ event.banner_image.url }}" alt="{{ event.title }}" class="banner-img">
+            {% else %}
+                <div class="placeholder-banner">No Banner Image Available</div>
+            {% endif %}
+        </div>
+
+        <!-- Event Title & Tagline -->
+        <div class="event-header">
+            <h1>{{ event.title }}</h1>
+            <p class="tagline">{{ event.tagline }}</p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="tel:+123456789" class="btn-call">
+                <span class="icon">📞</span> Call Now
+            </a>
+               <div class="cta-wrapper">
+   <a href="{% url 'book_event_with_id' event.id %}" class="btn btn-primary">
+    Enquiry Form
+</a>
+            </div>
+        </div>
+
+        <!-- Main Description -->
+        <div class="about-box">
+            <p class="description-text">
+                {{ event.description }}
+            </p>
+        </div>
+
+        <!-- Services Included -->
+        <div class="about-box services-section">
+            <h2>Services Included</h2>
+            <ul class="services-list">
+                {% for service in event.services.all %}
+                    <li class="service-item">
+                        <span class="bullet-square"></span>
+                        <span>{{ service.title }}</span>
+                    </li>
+                {% empty %}
+                    <li class="service-item">No specific services listed for this event.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Event Highlights Grid -->
+        <div class="about-box highlights-section">
+            <h2>Event Highlights</h2>
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <span class="highlight-icon">👥</span>
+                    <span class="highlight-text">{{ event.attendees_count }}</span>
+                </div>
+                <div class="highlight-card">
+                    <span class="highlight-icon">🎤</span>
+                    <span class="highlight-text">{{ event.speakers_count }}</span>
+                </div>
+                <div class="highlight-card">
+                    <span class="highlight-icon">📅</span>
+                    <span class="highlight-text">{{ event.duration }}</span>
+                </div>
+                <div class="highlight-card">
+                    <span class="highlight-icon">📍</span>
+                    <span class="highlight-text">{{ event.location_name }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sample Pricing & Primary CTA -->
+        <div class="about-box pricing-section">
+            <h2>Sample Pricing</h2>
+            <p class="pricing-text">
+                {{ event.pricing_description }}
+            </p>
+            <div class="cta-wrapper">
+   <a href="{% url 'book_event_with_id' event.id %}" class="btn btn-primary">
+    Book Event
+</a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Enquiry Modal Form -->
+<div id="enquiryModal" class="modal-overlay hidden">
+    <div class="modal-card">
+        <button onclick="closeModal()" class="modal-close-btn">&times;</button>
+        
+        <h3>Enquire for Event</h3>
+        <p class="modal-subtitle">Fill out the details below for <strong>{{ event.title }}</strong>.</p>
+        
+        <form method="POST" action="" class="enquiry-form">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label>Name</label>
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                {{ form.phone }}
+            </div>
+            <div class="form-group">
+                <label>Message / Requirements</label>
+                {{ form.message }}
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" onclick="closeModal()" class="btn-cancel">Cancel</button>
+                <button type="submit" class="btn-submit">Submit Enquiry</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openModal() {
+        document.getElementById('enquiryModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('enquiryModal').classList.add('hidden');
+    }
+</script>
+
+{% endblock %}

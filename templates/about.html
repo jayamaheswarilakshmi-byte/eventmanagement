@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="about">
+
+    <div class="container">
+
+        <!-- Main Heading -->
+        <div class="about-heading">
+            <h1>About Us</h1>
+            <p>
+                Learn more about our company and our commitment to creating
+                unforgettable events.
+            </p>
+        </div>
+
+        <!-- Our Story -->
+        <div class="about-box">
+            <h2>Our Story</h2>
+            <p>
+                Founded in 2010, ULTIMATE EVENTS began as a small team of passionate
+                event planners with a vision to transform ordinary gatherings into
+                extraordinary experiences. Over the years, we've grown into a leading
+                event management company, known for our creativity, attention to
+                detail, and commitment to client satisfaction. Our journey has been
+                marked by countless successful events, ranging from intimate
+                celebrations to large-scale corporate functions, each reflecting our
+                dedication to excellence.
+            </p>
+        </div>
+
+        <!-- Our Mission & Vision -->
+        <div class="about-box">
+            <h2>Our Mission & Vision</h2>
+            <p>
+                Our mission is to craft exceptional events that exceed expectations
+                and leave a lasting impression. We envision a world where every
+                event is a seamless, memorable experience, meticulously planned and
+                flawlessly executed. We strive to be the premier choice for event
+                management, recognized for our innovative approach, personalized
+                service, and unwavering commitment to quality.
+            </p>
+        </div>
+
+        <!-- Years of Experience -->
+        <div class="about-box experience-box">
+            <h2>Years of Experience</h2>
+            <div class="exp-card">
+                <span class="exp-label">Years of Experience</span>
+                <span class="exp-number">{{ years_of_experience|default:"14" }}</span>
+            </div>
+        </div>
+
+        <!-- Our Team -->
+        <div class="about-box team-section">
+            <h2>Our Team</h2>
+            <p>
+                Our team is comprised of seasoned professionals with diverse
+                backgrounds in event planning, design, logistics, and marketing. Each
+                member brings a unique set of skills and expertise, united by a shared
+                passion for creating exceptional events. We foster a collaborative
+                environment where creativity thrives, and every detail benefits from
+                our collective knowledge and experience.
+            </p>
+
+            <div class="team-grid">
+                
+                    <div class="team-card">
+                        <img src="{% static 'images/client1.png' %}" alt="Emily Carter">
+                        <h3>Emily Carter</h3>
+                        <p>Lead Event Planner</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="{% static 'images/client2.png' %}" alt="David Lee">
+                        <h3>David Lee</h3>
+                        <p>Creative Director</p>
+                    </div>
+                    <div class="team-card">
+                        <img src="{% static 'images/client3.png' %}" alt="Sophia Clark">
+                        <h3>Sophia Clark</h3>
+                        <p>Logistics Manager</p>
+                    </div>
+            
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="about-box features-section">
+            <h2>Why Choose Us?</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="check-icon">✓</span>
+                    <h3>Expertise and Experience</h3>
+                    <p>
+                        With over 14 years in the industry, we have the knowledge and
+                        skills to handle events of any size and complexity.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="check-icon">✓</span>
+                    <h3>Personalized Service</h3>
+                    <p>
+                        We take the time to understand your unique vision and preferences,
+                        tailoring our services to create a truly personalized experience.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="check-icon">✓</span>
+                    <h3>Attention to Detail</h3>
+                    <p>
+                        From the smallest detail to the grandest gesture, we ensure every
+                        aspect of your event is flawless.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="check-icon">✓</span>
+                    <h3>Proven Track Record</h3>
+                    <p>
+                        Our portfolio of successful events speaks for itself, demonstrating
+                        our commitment to delivering exceptional results.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="cta-wrapper">
+            <a href="#" class="btn-book">Book Event</a>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
