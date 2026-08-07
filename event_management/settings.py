@@ -19,7 +19,7 @@ SECRET_KEY = os.environ.get(
 )
 
 # DEBUG is False in production on Render, True locally
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 # Accepts Render external hostname automatically, or defaults to localhost
 ALLOWED_HOSTS = ['*']
