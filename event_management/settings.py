@@ -22,8 +22,7 @@ SECRET_KEY = os.environ.get(
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 # Accepts Render external hostname automatically, or defaults to localhost
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.onrender.com']
 
 # --------------------------------------------------
 # Installed Applications
@@ -149,13 +148,8 @@ USE_TZ = True
 # --------------------------------------------------
 
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
-
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Enables compressed static files storage via WhiteNoise
 STORAGES = {
     'default': {
